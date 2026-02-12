@@ -56,17 +56,29 @@ body {
 }
 
 .publication-awards {
-  color: #fff;
+  color: #fff !important;
   background: var(--ergo-primary);
   padding: 4px 16px;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.9em;
   letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.publication-awards:hover {
+  background: var(--ergo-primary-dark);
+  text-decoration: none;
+  color: #fff !important;
 }
 
 .publication-authors a {
   color: var(--ergo-primary) !important;
+}
+
+.publication-authors a.publication-awards {
+  color: #fff !important;
 }
 
 .publication-authors a:hover {
