@@ -1,0 +1,240 @@
+/* ===== ERGO Project Page Styles ===== */
+
+:root {
+  --ergo-primary: #2563eb;
+  --ergo-primary-dark: #1d4ed8;
+  --ergo-accent: #0ea5e9;
+  --ergo-dark: #1e293b;
+  --ergo-gray: #64748b;
+  --ergo-light-bg: #f1f5f9;
+  --ergo-border: #e2e8f0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #334155;
+  line-height: 1.7;
+}
+
+/* ---- Title Styles ---- */
+.ergo-main-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ergo-dark);
+  font-size: 2.5rem;
+  line-height: 1.35;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ---- General ---- */
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.link-block a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.publication-authors {
+  font-family: 'Inter', sans-serif;
+}
+
+.publication-venue {
+  color: #555;
+  width: fit-content;
+  font-weight: bold;
+}
+
+.publication-awards {
+  color: #fff;
+  background: var(--ergo-primary);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+}
+
+.publication-authors a {
+  color: var(--ergo-primary) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.author-note {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* ---- Section Titles ---- */
+.title.is-2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--ergo-dark);
+  letter-spacing: -0.01em;
+}
+
+.title.is-3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--ergo-dark);
+  letter-spacing: -0.01em;
+}
+
+.title.is-4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--ergo-gray);
+  letter-spacing: -0.01em;
+}
+
+/* ---- Content Text ---- */
+.content.has-text-justified p {
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #374151;
+}
+
+/* ---- Figure Boxes ---- */
+.figure-box {
+  background: #fff;
+  border: 1px solid var(--ergo-border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.figure-box:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.figure-caption {
+  margin-top: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--ergo-gray);
+  line-height: 1.5;
+}
+
+.figure-caption strong {
+  color: var(--ergo-dark);
+}
+
+/* ---- Key Contributions ---- */
+.contributions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contributions-list li {
+  position: relative;
+  padding: 16px 16px 16px 48px;
+  margin-bottom: 12px;
+  background: #fff;
+  border: 1px solid var(--ergo-border);
+  border-radius: 10px;
+  border-left: 4px solid var(--ergo-primary);
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.contributions-list li::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  font-size: 18px;
+}
+
+/* ---- Method Cards ---- */
+.method-card {
+  background: #fff;
+  border: 1px solid var(--ergo-border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s ease;
+}
+
+.method-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.method-card h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--ergo-primary);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.method-card p {
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  color: #374151;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* ---- Placeholder Sections ---- */
+.placeholder-area {
+  background: var(--ergo-light-bg);
+  border: 2px dashed var(--ergo-border);
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.placeholder-area p {
+  font-family: 'Inter', sans-serif !important;
+  color: var(--ergo-gray) !important;
+  font-style: italic;
+  font-size: 0.95rem !important;
+}
+
+/* ---- Citation Block ---- */
+#BibTeX pre {
+  background: var(--ergo-dark);
+  color: #e2e8f0;
+  border-radius: 10px;
+  padding: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+/* ---- Footer ---- */
+.footer {
+  background: var(--ergo-light-bg);
+  border-top: 1px solid var(--ergo-border);
+}
+
+.footer p {
+  font-family: 'Inter', sans-serif;
+  color: var(--ergo-gray);
+  font-size: 0.9rem;
+}
+

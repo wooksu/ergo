@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="ERGO: Efficient High-Resolution Visual Understanding for Vision-Language Models">
+  <meta name="keywords" content="ERGO, Vision-Language Models, Reinforcement Learning, High-Resolution, Efficient">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ERGO</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+</head>
+
+<body>
+
+  <!-- ======== Hero / Title ======== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <h1 class="ergo-main-title">
+              ERGO: Efficient High-Resolution Visual Understanding for Vision-Language Models
+            </h1>
+
+            <!-- Authors -->
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Jewon Lee<sup>*</sup>,</span>
+              <span class="author-block">Wooksu Shin<sup>*</sup>,</span>
+              <span class="author-block">Seungmin Yang,</span>
+              <span class="author-block">Ki-Ung Song,</span>
+              <span class="author-block">DongUk Lim,</span>
+              <span class="author-block">Jaeyeon Kim</span>
+              <br>
+              <span class="author-block">Tae-Ho Kim<sup>&dagger;</sup>,</span>
+              <span class="author-block">Bo-Kyeong Kim<sup>&dagger;</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors" style="margin-top: 6px;">
+              <span class="author-block">Nota Inc.</span>
+            </div>
+
+            <div class="publication-authors author-note">
+              <span class="author-block"><sup>*</sup>Equal contribution (listed alphabetically)</span>
+              <span class="author-block">&nbsp;&nbsp;<sup>&dagger;</sup>Corresponding authors</span>
+            </div>
+
+            <!-- Venue Badge -->
+            <div class="is-size-5 publication-authors" style="margin-top: 10px;">
+              <span class="author-block publication-awards">ICLR 2026</span>
+            </div>
+
+            <!-- Links -->
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Paper PDF -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2509.21991" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- arXiv -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2509.21991" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- GitHub -->
+                <span class="link-block">
+                  <a href="https://github.com/nota-github/ERGO"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- HuggingFace -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/nota-ai/ERGO-7B"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <span style="font-size:18px">&#129303;</span>
+                    </span>
+                    <span>Model</span>
+                  </a>
+                </span>
+                <!-- Demo (placeholder) -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" title="Coming soon">
+                    <span class="icon">
+                      <i class="fas fa-desktop"></i>
+                    </span>
+                    <span>Demo</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== Fig1: Comparison with Prior Work ======== -->
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column" style="max-width: 960px;">
+          <div class="figure-box">
+            <img src="static/images/comparision_with_prior.png" alt="Comparison with prior methods" width="100%" />
+            <p class="figure-caption">
+              <strong>Comparison with prior work on high-resolution visual reasoning.</strong>
+              The yellow box marks the target object, which becomes indiscernible after input-image downsampling.
+              (a)&nbsp;Zheng et al. succeeds when the object remains discernible, but at the cost of a large number of vision tokens.
+              (b)&nbsp;Zheng et al. fails when the object is indiscernible at low resolution, where fewer vision tokens are available.
+              (c)&nbsp;Our <strong>ERGO</strong> performs reasoning-driven perception, correctly answering the question even on low-resolution images.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== Abstract ======== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Existing Large Vision-Language Models (LVLMs) incur substantial computational overhead
+              when processing high-resolution images due to the massive number of vision tokens.
+              We introduce a two-stage &ldquo;coarse-to-fine&rdquo; reasoning pipeline:
+              a downsampled image is first analyzed to identify task-relevant regions,
+              then only those regions are cropped at full resolution for subsequent reasoning.
+            </p>
+            <p>
+              A key challenge is that prior methods rely on <em>perception-driven</em> reasoning&mdash;they
+              fail to locate relevant regions once fine-grained visual cues are lost through downsampling.
+              <strong>ERGO (Efficient Reasoning &amp; Guided Observation)</strong> instead performs
+              <em>reasoning-driven perception</em>, leveraging multimodal context to determine where to focus
+              even when target objects become visually indiscernible.
+              We develop simple yet effective reward components in a reinforcement learning framework
+              that encourage both accurate region selection and efficient vision-token usage,
+              achieving higher accuracy with significantly fewer tokens across multiple benchmarks.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== Key Contributions ======== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Key Contributions</h2>
+          <ul class="contributions-list">
+            <li data-icon="&#9654;">
+              <strong>Efficient coarse-to-fine pipeline.</strong>
+              A two-stage reasoning pipeline that first processes low-resolution inputs to identify task-relevant regions
+              and then re-encodes them at higher resolution, reducing computational cost while preserving essential information.
+            </li>
+            <li data-icon="&#127919;">
+              <strong>Reward for reasoning-driven perception.</strong>
+              With our proposed reward, the policy model learns that relying solely on accurate object localization
+              is not always optimal and that contextual knowledge can often be more beneficial.
+              We are the first to demonstrate this insight for high-resolution visual processing in LVLMs.
+            </li>
+            <li data-icon="&#128200;">
+              <strong>State-of-the-art performance with fewer vision tokens.</strong>
+              ERGO surpasses competitive methods in accuracy on multiple high-resolution benchmarks,
+              while reducing vision token counts and delivering practical speedups.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== Fig2: Training Pipeline ======== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column" style="max-width: 960px;">
+          <div class="figure-box">
+            <img src="static/images/training_pipeline.png" alt="Training Pipeline" width="100%" />
+            <p class="figure-caption">
+              <strong>Overview of RL-based training pipeline.</strong>
+              The red background highlights the components of the proposed TCE reward.
+              The green background highlights the conventional rewards adopted by most reasoning LVLMs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== Method ======== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+
+          <h2 class="title is-3 has-text-centered">Method</h2>
+          <div class="content has-text-justified" style="margin-bottom: 32px;">
+            <p>
+              ERGO&rsquo;s training objective is explicitly aligned with vision-processing efficiency in a reinforcement learning (RL) framework.
+              Given an image and a text query, the pipeline operates in two stages:
+              (1) the policy model predicts bounding-box coordinates for the task-relevant region with a thinking trace,
+              and (2) the cropped region at original resolution is fed back for final answer generation.
+            </p>
+          </div>
+
+          <h2 class="title is-4 has-text-centered" style="margin-bottom: 20px;">Reward Design</h2>
+
+          <div class="method-card">
+            <h4>Region-Verification Reward</h4>
+            <p>
+              Task performance is evaluated using <em>only</em> the cropped region and the query, without access to the original image.
+              This encourages the policy model to identify informative, self-contained regions that preserve sufficient information for accurate reasoning.
+            </p>
+          </div>
+
+          <div class="method-card">
+            <h4>Box Adjustment Reward</h4>
+            <p>
+              A complementary reward that regularizes the size of the selected region.
+              It penalizes overly large crops based on the area ratio, preventing the trivial strategy of selecting the entire image
+              while allowing flexible region selection.
+            </p>
+          </div>
+
+          <div class="method-card">
+            <h4>Task-Driven Contextual Exploration (TCE) Reward</h4>
+            <p>
+              The main reward combining region-verification and box adjustment:
+              <strong>r<sub>TCE</sub> = &alpha; &middot; r<sub>region</sub> + &beta; &middot; r<sub>box</sub></strong>.
+              This enables the policy model to learn robust and efficient region selection strategies for vision-grounded reasoning.
+            </p>
+          </div>
+
+          <div class="method-card">
+            <h4>Final Reward Formulation</h4>
+            <p>
+              The overall reward is a linear combination of three components:
+              <strong>R = r<sub>TCE</sub> + r<sub>acc</sub> + r<sub>format</sub></strong>,
+              where the accuracy reward bridges the training-test mismatch and the format reward enforces well-structured outputs.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======== Results ======== -->
+  <section class="section">
+    <div class="container">
+
+      <h2 class="title is-2 has-text-centered" style="margin-bottom: 40px;">Results</h2>
+
+      <!-- Main Results -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths" style="max-width: 900px;">
+          <h3 class="title is-4">Main Results</h3>
+          <div class="figure-box">
+            <img src="static/images/table2.png" alt="Performance comparison under pixel constraints" width="100%" />
+            <p class="figure-caption">
+              <strong>Performance comparison under efficiency-considered scenarios with pixel constraints.</strong>
+              ERGO outperforms the original model and post-training methods across all benchmarks.
+              &dagger; denotes reproduction with their code using our data, while &Dagger; denotes inference with their original pipeline.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Efficiency Analysis -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 32px;">
+        <div class="column is-four-fifths" style="max-width: 900px;">
+          <h3 class="title is-4">Efficiency Analysis</h3>
+          <div class="figure-box" style="margin-bottom: 24px;">
+            <img src="static/images/fig4.png" alt="Performance-efficiency trade-off" width="100%" />
+            <p class="figure-caption">
+              <strong>Performance-efficiency trade-off on the V* benchmark.</strong>
+              The total number of vision tokens is the sum of the tokens from the downsampled original image and those from the high-resolution cropped image.
+            </p>
+          </div>
+          <div class="columns">
+            <div class="column is-half">
+              <div class="figure-box">
+                <img src="static/images/table3.png" alt="Vision token counts comparison" width="100%" />
+                <p class="figure-caption">
+                  <strong>Comparison of vision token counts in coarse-to-fine reasoning.</strong>
+                </p>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="figure-box">
+                <img src="static/images/table4.png" alt="Latency comparison" width="100%" />
+                <p class="figure-caption">
+                  <strong>Latency comparison with models that leverage multiple tool calls on V* using the vLLM engine.</strong>
+                  Latency represents the average duration to produce a final answer for each image&ndash;query pair.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In-Depth Analysis -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 32px;">
+        <div class="column is-four-fifths" style="max-width: 900px;">
+          <h3 class="title is-4">In-Depth Analysis</h3>
+          <div class="columns">
+            <div class="column is-half">
+              <div class="figure-box">
+                <img src="static/images/fig5.png" alt="Robustness under target-object masking" width="100%" />
+                <p class="figure-caption">
+                  <strong>Evaluation of model robustness under target-object masking.</strong>
+                  Models can only succeed by leveraging contextual information when the object is completely masked.
+                  ERGO achieves the most robust performance in the masked condition.
+                </p>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="figure-box">
+                <img src="static/images/table5.png" alt="Conventional benchmark results" width="100%" />
+                <p class="figure-caption">
+                  <strong>Results on conventional vision&ndash;language benchmarks.</strong>
+                  ERGO maintains or improves the capabilities of the base Qwen2.5-VL-7B model.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ablation Studies -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 32px;">
+        <div class="column is-four-fifths" style="max-width: 900px;">
+          <h3 class="title is-4">Ablation Studies</h3>
+          <div class="figure-box" style="margin-bottom: 24px;">
+            <img src="static/images/table6.png" alt="Ablation analysis" width="100%" />
+            <p class="figure-caption">
+              <strong>Ablation analysis.</strong>
+              Average performance is measured over six benchmarks.
+              (a) Reward design, (b) TCE reward weight, (c) Parameter size, (d) Reward model, (e) Box adjustment reward.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======== Qualitative Results ======== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <h2 class="title is-2 has-text-centered" style="margin-bottom: 40px;">Qualitative Results</h2>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-half">
+          <div class="figure-box">
+            <img src="static/images/1.png" alt="Qualitative result 1" width="100%" />
+            <p class="figure-caption">
+              ERGO utilizes coarse cues (&ldquo;the region where the bottle is located&rdquo;) to provide the answer.
+            </p>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="figure-box">
+            <img src="static/images/3.png" alt="Qualitative result 3" width="100%" />
+            <p class="figure-caption">
+              ERGO can also exploit clear visual cues (the purple umbrella and the orange luggage) when the object is still discernible.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======== Citation ======== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3 has-text-centered">Citation</h2>
+      <pre><code>@misc{lee2025ergoefficienthighresolutionvisual,
+  title={ERGO: Efficient High-Resolution Visual Understanding for Vision-Language Models},
+  author={Jewon Lee and Wooksu Shin and Seungmin Yang and Ki-Ung Song and DongUk Lim and Jaeyeon Kim and Tae-Ho Kim and Bo-Kyeong Kim},
+  year={2025},
+  eprint={2509.21991},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2509.21991},
+}</code></pre>
+    </div>
+  </section>
+
+
+  <!-- ======== Footer ======== -->
+  <footer class="footer">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center;">
+            This website is adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a
+              href="https://mathvista.github.io/">MathVista</a>.
+            <br>Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
